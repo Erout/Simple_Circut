@@ -20,11 +20,12 @@ bool doorAnd::getOutupt(){
 		total *= *it;
 		it++;
 	}
-}//vector .end() contains element?
+}//vector .end() contains element?->no
 door& doorAnd::operator+=(door& d){
 	input_.pushback(d.output_);
 	return *this;
 }
+//= door and to door and
 door& doorAnd::operator=(door& d){
 	name_ = d.name_;
 	T_ = d.T_;

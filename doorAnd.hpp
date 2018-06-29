@@ -9,6 +9,7 @@ public:
 	void setInput(vector<bool> in);
 	bool getOutput();
 	//bool* getInput();
+	void setStatus(bool s);
 	door& operator+=(door& d);
 	door& operator=(door& d);
 };
