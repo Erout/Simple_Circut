@@ -2,9 +2,7 @@
 doorAnd::doorAnd(int id):door(id,"AND"){
 	;
 }
-type doorAnd::getType(){
-	return T_;
-}
+doorAnd::~doorAnd(){};
 bool doorAnd::setInput(vector<bool> in){
 	auto it = in.begin();
 	while(it != in.end()){
@@ -24,6 +22,7 @@ bool doorAnd::getOutupt(){
 	output_ = total;
 	return output_;
 }//vector .end() contains element?->no
+/*
 door& doorAnd::operator+=(door& d){
 	input_.pushback(d.output_);
 	return *this;
@@ -43,10 +42,10 @@ door& doorAnd::operator=(door& d){
 }
 /*void doorAnd::setStatus(bool s){
 	status_ = s;
-}*/
+}*//*
 int doorAnd::getId(){
 	return id_;
 }
 string doorAnd::getName(){
 	return name_;
-}
+}*/

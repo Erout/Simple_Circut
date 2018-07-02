@@ -3,9 +3,6 @@ doorOrNot::doorOrNot(int id):door(id,"ORNOT"){
 	;
 }
 doorOrNot::~doorOrNot(){};
-type doorOrNot::getType(){
-	return T_;
-}
 bool doorOrNot::setInput(vector<bool> in){
 	auto it = in.begin();
 	while(it != in.end()){
@@ -27,7 +24,7 @@ bool doorOrNot::getOutput(){
 }
 /*void doorOrNot::setStatus(bool s){
 	status_ = s;
-}*/
+}*//*
 door& operator+=(door& d){
 	input_.pushback(d.output);
 	return *this;
@@ -49,4 +46,4 @@ int doorOrNot::getId(){
 }
 string doorOrNot::getName(){
 	return name_;
-}
+}*/

@@ -2,9 +2,7 @@
 doorOr::doorOr(int id):door(id,"OR"){
 	;
 }
-type doorOr::getType(){
-	return T_;
-}
+doorOr::~doorOr(){};
 bool doorOr::setInput(vector<bool> in){
 	auto it = in,begin();
 	while(it != in.end()){
@@ -24,6 +22,7 @@ bool doorOr::getOutput(){
 	output_ = total;
 	return output_;
 }
+/*
 door& doorOr::operator+=(door& d){
 	input_.pushback(d.output_);
 	return *this;
@@ -48,4 +47,4 @@ int doorOr::getId(){
 }
 string doorOr::getName(){
 	return name_;
-}
+}*/

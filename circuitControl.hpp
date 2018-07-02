@@ -32,7 +32,7 @@ private:
 	door* head_;
 	door* tail_;
 	int doorNumber_;
-	vector<int> removelist;
+	//vector<int> removelist;
 	vector<int> existlist;
 	vector<int> connectlist;
 	vector<int> topologyOrder;//要从后往前
@@ -44,12 +44,13 @@ public:
 	bool create(int type);
 	void list();
 	bool connect(int ida, int idb);
-	void remove(int id);
+	//void remove(int id);
 	void print();
 	bool setInput(vector<bool> in);
 	void execute();
 	void clear();
 	bool abnormalCheck();//有自反的或者对称的存在，则报错
+	bool inputCheck();//检查connect list 里面的电路是否有输入
 	void DFS();
 	void DFSVisit(Node* n);
 	circuitControl* getInstance();

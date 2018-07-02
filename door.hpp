@@ -21,13 +21,15 @@ public:
 	}
 	virtual ~door(){};
 	//virtual int getType()=0;
-	virtual int getId()=0;
+	//int getId();
 	virtual bool setInput(vector<bool> in)=0;//需要按连接顺序运行
 	virtual bool getOutput()=0;
 	//virtual bool* getInput()=0;
 	//virtual void setStatus(bool s);
-	virtual int getId()=0;
-	virtual string getName()=0;
+	bool haveInput();
+	void printInput();
+	int getId();
+	string getName();
 	virtual door& operator+=(door& d)=0;//增加输入
 	virtual door& operator=(door & d)=0;
 };

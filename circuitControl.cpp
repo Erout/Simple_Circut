@@ -35,7 +35,7 @@ void circuitControl::clear(){
 	tail = NULL;
 	delete instance_;
 	instance_ = NULL;
-	removelist.clear();
+	//removelist.clear();
 	existlist.clear();
 	connectlist.clear();
 	topologyOrder.clear();
@@ -98,37 +98,47 @@ bool circuitControl::connect(int ida, int idb){
 	connectlist.pushback(idb);
 	return true;
 }
-bool circuitControl::remove(int id){
+/*bool circuitControl::remove(int id){
 	if(!existlist.find(id))
 		return false;
 	removelist.push_back(id);
 	existlist.erase(id);
 	connectlist.erase (id);
 	return true;
-}
+}*/
 void circuitControl::print(){
 	cout<<"The adjMatrix is: "<<endl;
 	cout<<"id: ";
 	for(int j = 0; j < doorNum; j++){
-		if(!removelist.find(j)){
+		if(existlist.find(j)){
 			cout<<j<<" ";
 		}
 	}
 	cout<<endl;
 	for(int i = 0; i < doorNum; i++){
-		if(!removelist.find(i)){
+		if(existlist.find(i)){
 			cout<<i<<" | "
 			for(int j = 0; j < doorNum; j++){
-				if(!removelist.find(j)){
+				if(existlist.find(j)){
 					cout<<adjMatrix[i][j];
 				}
 			}
 		}
 	}
+	cout<<"the door id whose input you have set are: "<<endl;
+	door* temp = head;
+	while(temp != tail){
+		if(temp->haveInput()){
+			cout<<"id: "<<temp->getId()<<"  Input: "<<temp->printInput()<<endl;
+		}
+		temp = temp->next;
+	}
 }
 bool circuitControl::setInput(int id,vector<bool> in){
-	if(!connectlist.find(id))
+	if(!connectlist.find(id)){
+		cout<<"the door isn't connected, set input failed"<<endl;
 		return false;
+	}
 	door* temp = head;
 	while(temp->getId() != id)
 		temp = temp->next;
@@ -136,13 +146,15 @@ bool circuitControl::setInput(int id,vector<bool> in){
 	return true;
 }
 void circuitControl::execute(){
-	if(abnormalCheck == 0){
-		cout<<"Abnormal! Please restart."<<endl;
+	if(abnormalCheck() == 0){
+		cout<<"Abnormal! Please check your circuit and redo your job."<<endl;
 		return;
+	}
+	if(inputCheck() == 0){
+		cout<<"You haven't set all the input,execution failed."<<endl;
 	}
 	DFS();
 	auto iter = topologyOrder.rbegin()
-	//检查是否有输入？
 	door* temp = head;
 	door* putto = head;
 	int output = 1;
@@ -217,4 +229,29 @@ void circuitControl::DFSVisit(Node* n){
 	time++;
 	n->finish = time;
 	topologyOrder.pushback(n->id);
+}
+bool circuitControl::inputCheck(){
+	int haveinput = 0;
+	door* temp = head;
+	auto iter = connectlist.begin();
+	for(iter; iter != connectlist.end(); iter++){
+		haveinput = 0;
+		for(int i = 0; i < doorNum; i++){
+			if(adjMatrix[i][*iter] == 1){
+				haveinput = 1;
+				break;
+			}
+		}
+		if(haveinput == 0){
+			temp = head;
+			while(temp->getId() != *iter)
+				temp = temp->next;
+			if(temp->haveInput())
+				haveinput = 1;			
+		}
+		if(haveinput == 0){
+			return false;
+		}
+	}
+	return true;
 }

@@ -3,9 +3,6 @@ doorAndNot::doorAndNot(int id):door(id,"ANDNOT"){
 	;
 }
 doorAndNot::~doorAndNot(){};
-type doorAndNot::getType(){
-	return T_;
-}
 bool doorAndNot::setInput(vector<bool> in){
 	auto it = in.begin();
 	while(it != in.end()){
@@ -27,7 +24,7 @@ bool doorAndNot::getOutput(){
 }
 /*void doorAndNot::setStatus(bool s){
 	status_ = s;
-}*/
+}*//*
 door& doorAndNot::operator+=(door& d){
 	input_.pushback(d.output);
 	return *this;
@@ -49,4 +46,4 @@ int doorAndNot::doorAndNot::getId(){
 }
 string doorAndNot::getName(){
 	return name_;
-}
+}*/

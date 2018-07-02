@@ -3,9 +3,6 @@ doorNot::doorNot(int id):door(id,"NOT"){
 	;
 }
 doorNot::~doorNot(){};
-type doorNot::getType(){
-	return T_;
-}
 bool doorNot::setInput(vector<bool> in){
 	if(in.size() > 1)
 		return false;
@@ -26,7 +23,7 @@ bool doorNot::getOutput(){
 }
 /*void doorNot::setStatus(bool s){
 	status_ = s;
-}*/
+}*//*
 door& operator+=(door& d){
 	input_.pushback(d.output);
 	return *this;
@@ -48,4 +45,4 @@ int doorNot::getId(){
 }
 string doorNot::getName(){
 	return name_;
-}
+}*/
