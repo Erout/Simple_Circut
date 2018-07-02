@@ -3,13 +3,14 @@
 #include"door.hpp"
 class doorOr:public door{
 public:
-	doorOr(int id, string name, type T);
+	doorOr(int id);
 	~doorOr();
 	int getType();
-	void setInput(bool* in);
+	bool setInput(vector<bool> in);
 	bool getOutput();
 	void setStatus(bool s);
-	bool* getInput();
+	int getId();
+	string getName();
 	door& operator+=(door& d);
 	door& operator=(door& d);
 };

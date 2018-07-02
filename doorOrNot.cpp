@@ -1,19 +1,20 @@
-#include "doorNot.hpp"
-doorNot::doorNot(int id):door(id,"NOT"){
+#include "doorOrNot.hpp"
+doorOrNot::doorOrNot(int id):door(id,"ORNOT"){
 	;
 }
-doorNot::~doorNot(){};
-type doorNot::getType(){
+doorOrNot::~doorOrNot(){};
+type doorOrNot::getType(){
 	return T_;
 }
-bool doorNot::setInput(vector<bool> in){
-	if(in.size() > 1)
-		return false;
+bool doorOrNot::setInput(vector<bool> in){
 	auto it = in.begin();
-	input_.pushback(*it);
+	while(it != in.end()){
+		input_.push_back(*it);
+		it++;
+	}
 	return true;
 }
-bool doorNot::getOutput(){
+bool doorOrNot::getOutput(){
 	auto iter = input_.begin();
 	bool total = *iter;
 	iter++;
@@ -24,7 +25,7 @@ bool doorNot::getOutput(){
 	output_ = !total;
 	return output_;
 }
-/*void doorNot::setStatus(bool s){
+/*void doorOrNot::setStatus(bool s){
 	status_ = s;
 }*/
 door& operator+=(door& d){
@@ -43,9 +44,9 @@ door& operator=(door& d){
 	}
 	output_ = d.output_;
 }
-int doorNot::getId(){
+int doorOrNot::getId(){
 	return id_;
 }
-string doorNot::getName(){
+string doorOrNot::getName(){
 	return name_;
 }

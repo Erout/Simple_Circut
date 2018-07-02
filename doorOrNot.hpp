@@ -1,10 +1,10 @@
-#ifndef DOORNOT_HPP
-#define DOORNOT_HPP
+#ifndef DOORORNOT_HPP
+#define DOORORNOT_HPP
 #include"door.hpp"
-class doorNot:public door{
+class doorOrNot:public door{
 public:
-	doorNot(int id);
-	~doorNot();
+	doorOrNot(int id);
+	~doorOrNot();
 	type getType();
 	bool setInput(vector<bool> in);
 	bool getOutput();

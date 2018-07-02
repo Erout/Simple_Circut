@@ -1,31 +1,56 @@
 #ifndef CIRCIUT_HPP
 #define CIRCIUT_HPP
 #include<iostream>
-//#include<vector>
+#include<vector>
 #include"door.hpp"
 using std::cout;
 using std::cin;
+using std::endl;
 using std::vector;
 #define size 100
+#define infinite 1000000
+enum Colour={white,grey,black};
+enum Type={and,or,not,andnot,ornot};
 typedef struct Node{
-	door* D;
-	Node* next;
-}
+	Node* father;
+	Colour color;
+	int id;
+	int discover;
+	int finish;
+	Node(int identity,Colour c = white, Node* n = NULL, int d = infinite, int f = infinite){
+		id = identity;
+		color = c;
+		father = n;
+		discover = d;
+		finish = f;
+	}						
+}Node;
 class circuitControl{
-private:
-	circuitControl* instance_;
-	bool adjMatrix[size][size];
-	Node* head_;
-	Node* tail_;
-	int doorNumber_;//record the number of doors that have been created
-	//vector<int> exist_;//record the id of doors that still exist
-	//vecotr<int> removed_;//record the id of doors that have been removed
+private:	
+	static circuitControl* instance_;
+	bool adjMatrix[size][size]; 
+	door* head_;
+	door* tail_;
+	int doorNumber_;
+	vector<int> removelist;
+	vector<int> existlist;
+	vector<int> connectlist;
+	vector<int> topologyOrder;//要从后往前
+	Node* vertex[size];
+	int time;
 public:
-	void create(int type);
+	circuitControl();
+	~circuitControl();
+	bool create(int type);
 	void list();
-	void connect();
-	//void remove(int id);
+	bool connect(int ida, int idb);
+	void remove(int id);
 	void print();
-	void setInput();
+	bool setInput(vector<bool> in);
 	void execute();
+	void clear();
+	bool abnormalCheck();//有自反的或者对称的存在，则报错
+	void DFS();
+	void DFSVisit(Node* n);
+	circuitControl* getInstance();
 }

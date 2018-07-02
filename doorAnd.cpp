@@ -1,16 +1,17 @@
 #include"doorAnd.hpp"
-doorAnd::doorAnd(int id,stirng name, type T):door(id,name,T){
+doorAnd::doorAnd(int id):door(id,"AND"){
 	;
 }
 type doorAnd::getType(){
 	return T_;
 }
-void doorAnd::setInput(vector<bool> in){
+bool doorAnd::setInput(vector<bool> in){
 	auto it = in.begin();
 	while(it != in.end()){
 		input_.pushback(*it);
 		it++;
 	}
+	return true;
 }
 bool doorAnd::getOutupt(){
 	auto it = input_.begin();
@@ -20,6 +21,8 @@ bool doorAnd::getOutupt(){
 		total *= *it;
 		it++;
 	}
+	output_ = total;
+	return output_;
 }//vector .end() contains element?->no
 door& doorAnd::operator+=(door& d){
 	input_.pushback(d.output_);
@@ -37,4 +40,13 @@ door& doorAnd::operator=(door& d){
 		it++;
 	}
 	output_ = d.output_;
+}
+/*void doorAnd::setStatus(bool s){
+	status_ = s;
+}*/
+int doorAnd::getId(){
+	return id_;
+}
+string doorAnd::getName(){
+	return name_;
 }

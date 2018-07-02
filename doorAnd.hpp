@@ -3,12 +3,13 @@
 #include"door.hpp"
 class doorAnd:public door{
 public:
-	doorAnd(int id, string name, type T);
+	doorAnd(int id);
 	~doorAnd(){};
 	int getType();
 	void setInput(vector<bool> in);
 	bool getOutput();
-	//bool* getInput();
+	int getId();
+	string getName();
 	void setStatus(bool s);
 	door& operator+=(door& d);
 	door& operator=(door& d);

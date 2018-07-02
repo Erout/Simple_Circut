@@ -1,37 +1,38 @@
-#include "doorNot.hpp"
-doorNot::doorNot(int id):door(id,"NOT"){
+#include "doorAndNot.hpp"
+doorAndNot::doorAndNot(int id):door(id,"ANDNOT"){
 	;
 }
-doorNot::~doorNot(){};
-type doorNot::getType(){
+doorAndNot::~doorAndNot(){};
+type doorAndNot::getType(){
 	return T_;
 }
-bool doorNot::setInput(vector<bool> in){
-	if(in.size() > 1)
-		return false;
+bool doorAndNot::setInput(vector<bool> in){
 	auto it = in.begin();
-	input_.pushback(*it);
+	while(it != in.end()){
+		input_.push_back(*it);
+		it++;
+	}
 	return true;
 }
-bool doorNot::getOutput(){
+bool doorAndNot::getOutput(){
 	auto iter = input_.begin();
 	bool total = *iter;
 	iter++;
 	while(iter != input_.end()){
-		total += *iter;
+		total *= *iter;
 		iter++;
 	}
 	output_ = !total;
 	return output_;
 }
-/*void doorNot::setStatus(bool s){
+/*void doorAndNot::setStatus(bool s){
 	status_ = s;
 }*/
-door& operator+=(door& d){
+door& doorAndNot::operator+=(door& d){
 	input_.pushback(d.output);
 	return *this;
 }
-door& operator=(door& d){
+door& doorAndNot::operator=(door& d){
 	name_ = d.name_;
 	T_ = d.T_;
 	id_ = d.id_;
@@ -43,9 +44,9 @@ door& operator=(door& d){
 	}
 	output_ = d.output_;
 }
-int doorNot::getId(){
+int doorAndNot::doorAndNot::getId(){
 	return id_;
 }
-string doorNot::getName(){
+string doorAndNot::getName(){
 	return name_;
 }
