@@ -1,9 +1,4 @@
 #include"door.hpp"
-bool door::haveinput(){
-	if(input_.empty())
-		return false;
-	return true;
-}
 void door::printInput(){
 	auto iter = input_.begin();
 	while(iter != input_.end()){
@@ -17,8 +12,15 @@ int door::getId(){
 string door::getName(){
 	return name_;
 }
+door* door::getNext(){
+	return next;
+}
+bool door::setNext(door* d){
+	next = d;
+	return true;
+}
 door& door::operator+=(door& d){
-	input_.pushback(d.output);
+	input_.push_back(d.output_);
 	return *this;
 }
 door& door::operator=(door& d){
@@ -27,8 +29,13 @@ door& door::operator=(door& d){
 	input_.clear();
 	auto it = d.input_.begin();
 	while(it != d.input_.end()){
-		input_.pushback(*it);
+		input_.push_back(*it);
 		it++;
 	}
 	output_ = d.output_;
+}
+bool door::haveInput(){
+	if(input_.empty())
+		return false;
+	return true;
 }

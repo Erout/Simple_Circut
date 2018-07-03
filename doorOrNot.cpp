@@ -3,7 +3,7 @@ doorOrNot::doorOrNot(int id):door(id,"ORNOT"){
 	;
 }
 doorOrNot::~doorOrNot(){};
-bool doorOrNot::setInput(vector<bool> in){
+bool doorOrNot::setInput(vector<int> in){
 	auto it = in.begin();
 	while(it != in.end()){
 		input_.push_back(*it);

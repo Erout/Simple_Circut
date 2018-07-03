@@ -6,7 +6,7 @@ public:
 	doorAnd(int id);
 	~doorAnd();
 	//int getType();
-	void setInput(vector<bool> in);
+	bool setInput(vector<int> in);
 	bool getOutput();
 	/*int getId();
 	string getName();

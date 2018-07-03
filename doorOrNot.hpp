@@ -6,7 +6,7 @@ public:
 	doorOrNot(int id);
 	~doorOrNot();
 	//type getType();
-	bool setInput(vector<bool> in);
+	bool setInput(vector<int> in);
 	bool getOutput();
 	/*void setStatus(bool s);
 	int getId();

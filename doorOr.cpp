@@ -3,10 +3,10 @@ doorOr::doorOr(int id):door(id,"OR"){
 	;
 }
 doorOr::~doorOr(){};
-bool doorOr::setInput(vector<bool> in){
-	auto it = in,begin();
+bool doorOr::setInput(vector<int> in){
+	auto it = in.begin();
 	while(it != in.end()){
-		input_.pushback(*it);
+		input_.push_back(*it);
 		it++;
 	}
 	return true;
@@ -41,7 +41,7 @@ door& doorOr::operator=(door& d){
 }
 /*void doorOr::setStatus(bool s){
 	status_ = s;
-}*/
+}*//*
 int doorOr::getId(){
 	return id_;
 }

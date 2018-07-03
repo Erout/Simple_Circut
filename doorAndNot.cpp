@@ -3,7 +3,7 @@ doorAndNot::doorAndNot(int id):door(id,"ANDNOT"){
 	;
 }
 doorAndNot::~doorAndNot(){};
-bool doorAndNot::setInput(vector<bool> in){
+bool doorAndNot::setInput(vector<int> in){
 	auto it = in.begin();
 	while(it != in.end()){
 		input_.push_back(*it);

@@ -3,11 +3,11 @@ doorNot::doorNot(int id):door(id,"NOT"){
 	;
 }
 doorNot::~doorNot(){};
-bool doorNot::setInput(vector<bool> in){
+bool doorNot::setInput(vector<int> in){
 	if(in.size() > 1)
 		return false;
 	auto it = in.begin();
-	input_.pushback(*it);
+	input_.push_back(*it);
 	return true;
 }
 bool doorNot::getOutput(){
