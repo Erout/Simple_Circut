@@ -10,6 +10,7 @@
 #include"doorAndNot.hpp"
 #include"doorOrNot.hpp"
 using std::set;
+using std::string;
 #define size 100
 #define infinite 1000000
 enum Colour {white,grey,black};
@@ -50,6 +51,7 @@ public:
 	void print(vector<int> doorlist);
 	bool setInput(int id,vector<int> in);
 	bool execute();
+	void clearInput();
 	void clear();
 	bool abnormalCheck();//有自反的或者对称的存在，则报错
 	bool inputCheck();//检查connect list 里面的电路是否有输入
@@ -57,5 +59,6 @@ public:
 	void DFSVisit(Node* n);
 	bool find(vector<int> list,int ele);
 	static circuitControl* getInstance();
+	//void getDoorInformation();//for debugging
 };
 #endif

@@ -19,6 +19,14 @@ circuitControl::~circuitControl(){
 	delete instance_;
 	instance_ = NULL;
 }
+void circuitControl::clearInput(){
+	door* temp = head_;
+	while(temp != tail_){
+		temp->clearInput();
+		temp = temp->getNext();
+	}
+	temp->clearInput();
+}
 void circuitControl::clear(){
 	door* temp = head_;
 	while(head_ != tail_){
@@ -29,9 +37,6 @@ void circuitControl::clear(){
 	delete head_;
 	head_ = NULL;
 	tail_ = NULL;
-	/*delete instance_;
-	instance_ = NULL;*/
-	//removelist.clear();
 	existlist.clear();
 	connectlist.clear();
 	topologyOrder.clear();
@@ -81,23 +86,18 @@ bool circuitControl::create(int T){
 		temp = temp->getNext();
 	}
 	if(T == And){
-		//temp->getNext() = new doorAnd(doorNumber_);
 		temp->setNext(new doorAnd(doorNumber_));
 	}
 	else if(T == Or){
-		//temp->getNext() = new doorOr(doorNumber_);
 		temp->setNext(new doorOr(doorNumber_));
 	}
 	else if(T == Not){
-		//temp->getNext() = new doorNot(doorNumber_);
 		temp->setNext(new doorNot(doorNumber_));
 	}
 	else if(T == Andnot){
-		//temp->getNext() = new doorAndNot(doorNumber_);
 		temp->setNext(new doorAndNot(doorNumber_));
 	}
 	else{
-		//temp->getNext() = new doorOrNot(doorNumber_);
 		temp->setNext(new doorOrNot(doorNumber_));
 	}
 	tail_ = temp->getNext();
@@ -118,7 +118,7 @@ void circuitControl::list(){
 	if(find(existlist,temp->getId()))
 		cout<<"Id: "<<temp->getId()<<"  doorType: "<<temp->getName()<<endl;
 
-	cout<<"the door id whose input you have set are: "<<endl;
+	cout<<"the door that have input are: "<<endl;
 	
 	temp = head_;
 	while(temp != tail_){
@@ -132,7 +132,7 @@ void circuitControl::list(){
 }
 bool circuitControl::connect(int ida, int idb){
 	if(!find(existlist,ida)||!find(existlist,idb)){
-		cout<<"invalid id choice! Connection failed"<<endl;
+		//cout<<"invalid id choice! Connection failed"<<endl;
 		return false;
 	}
 	adjMatrix[ida][idb] = 1;
@@ -143,7 +143,7 @@ bool circuitControl::connect(int ida, int idb){
 
 void circuitControl::print(vector<int> doorlist){
 	cout<<"The adjMatrix is: "<<endl;
-	cout<<"id: ";
+	cout<<"id  ";
 	for(int j = 0; j < doorNumber_; j++){
 		if(find(existlist,j)){
 			cout<<j<<" ";
@@ -155,23 +155,27 @@ void circuitControl::print(vector<int> doorlist){
 			cout<<i<<" | ";
 			for(int j = 0; j < doorNumber_; j++){
 				if(find(existlist,j)){
-					cout<<adjMatrix[i][j];
+					cout<<adjMatrix[i][j]<<" ";
 				}
 			}
 		}
+		cout << endl;
 	}
 	
 	door* temp = head_;
-	while(head_ != tail_){
+	while(temp != tail_){
 		if(find(doorlist,temp->getId())){
-			cout<<"The door Id: "<<temp->getId()<<"  The door output: "<<temp->getOutput();
+			cout<<"The door Id: "<<temp->getId()<<"  The door output: "<<temp->getOutput()<<endl;
 		}
 		temp = temp->getNext();
 	}
+	if(find(doorlist,temp->getId())){
+			cout<<"The door Id: "<<temp->getId()<<"  The door output: "<<temp->getOutput()<<endl;
+		}
 }
 bool circuitControl::setInput(int id,vector<int> in){
 	if(!find(connectlist,id)){
-		cout<<"the door isn't connected, set input failed"<<endl;
+		//cout<<"the door isn't connected, set input failed"<<endl;
 		return false;
 	}
 	door* temp = head_;
@@ -303,3 +307,14 @@ bool circuitControl::find(vector<int> list, int ele){
 	}
 	return false;
 }
+//for debugging
+/*
+void circuitControl::getDoorInformation(){
+	cout<<"door head add: "<<head_<<"   door tail add: "<<tail_<<endl;
+	door* temp = head_;
+	while(temp != NULL){
+		cout<<"ID: "<<temp->getId()<<" add: "<<temp<<"  nextadd: "<<temp->getNext()<<endl;
+		temp = temp->getNext();
+	}
+
+}*/

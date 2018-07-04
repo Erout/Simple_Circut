@@ -13,9 +13,11 @@ int main(){
 	bool execution = 1;
 	vector<int> sequence;
 	vector<int> seeDoorOutput;
-	while(act != 8){
+	instruction();
+	cin >> act;
+	while(act != 9){
 		//instruction();
-		cin>> act;
+		//cin>> act;
 		switch(act){
 			case 1:
 			if(!execution){
@@ -26,6 +28,7 @@ int main(){
 			cout<<"0:and  1:or  2:not  3:andnot  4:ornot"<<endl;
 			cin>>doortype;
 			circuit->create(doortype);
+			cout<<"Create door sucessfully!"<<endl;
 			break;
 			case 2:
 			if(!execution){
@@ -34,7 +37,10 @@ int main(){
 			}
 			cout<<"please enter two ids of door(the first will be connected to the second" <<endl;
 			cin>>first>>second;
-			circuit->connect(first,second);
+			if(circuit->connect(first,second))
+				cout<<"connection finish"<<endl;
+			else
+				cout<<"invalid id choice! Connection failed"<<endl;
 			break;
 			case 3:
 			circuit->list();
@@ -52,7 +58,11 @@ int main(){
 				sequence.push_back(element);
 				cin>>element;
 			}
-			circuit->setInput(inputdoor,sequence);
+			if(circuit->setInput(inputdoor,sequence)){
+				cout<<"setinput seccesfully"<<endl;
+			}
+			else
+				cout<<"the door isn't connected, set input failed"<<endl;
 			break;
 			case 5:
 			/*if(execution){
@@ -70,13 +80,23 @@ int main(){
 			case 6:
 			if(circuit->execute() == 1)
 				execution =0;
+			cout<<"execution finish"<<endl;
 			break;
 			case 7:
+			circuit->clearInput();
+			cout<<"Input have been cleared" <<endl;
+			case 8:
+			circuit->clearInput();
 			circuit->clear();
 			execution = 1;
+			cout<<"Clear finish" <<endl;
 			break;
 
 		} 
+		cout<<"Please enter action"<<endl;
+		cin >> act;
+		//for debugging
+		//circuit->getDoorInformation();
 	}
 	cout<<"Thank you for using it, goodbye!"<<endl;
 }
@@ -90,8 +110,9 @@ void instruction(){
 	cout<<"4: set door input"<<endl;
 	cout<<"5: print the circuit(by the form of adjacent matrix)"<<endl;
 	cout<<"6: execute "<<endl;
-	cout<<"7: clear and redo"<<endl;
-	cout<<"8: exit"<<endl;
+	cout<<"7: clear the input of all the doors(the doors and their connection does not change)"<<endl;
+	cout<<"8: clear the circuit and restart your job"<<endl;
+	cout<<"9: exit"<<endl;
 	cout<<"**********************************************************************************************"<<endl;
 
 }

@@ -12,13 +12,20 @@ bool doorAnd::setInput(vector<int> in){
 	return true;
 }
 bool doorAnd::getOutput(){
+	if(input_.empty())
+		return false;
 	auto it = input_.begin();
-	bool total = *it;
+	int total = *it;
 	it++;
 	while(it != input_.end()){
 		total *= *it;
 		it++;
 	}
-	output_ = total;
+	if(total == 0){
+		output_ = false;
+	}
+	else{
+		output_ = true;
+	}
 	return output_;
 }

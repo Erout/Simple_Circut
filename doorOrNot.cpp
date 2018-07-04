@@ -12,14 +12,20 @@ bool doorOrNot::setInput(vector<int> in){
 	return true;
 }
 bool doorOrNot::getOutput(){
+	if(input_.empty())
+		return false;
 	auto iter = input_.begin();
-	bool total = *iter;
+	int total = *iter;
 	iter++;
 	while(iter != input_.end()){
 		total += *iter;
 		iter++;
 	}
-	output_ = !total;
+	//output_ = !total;
+	if(total == 0)
+		output_ = true;
+	else
+		 output_ =false;
 	return output_;
 }
 /*void doorOrNot::setStatus(bool s){

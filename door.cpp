@@ -2,7 +2,7 @@
 void door::printInput(){
 	auto iter = input_.begin();
 	while(iter != input_.end()){
-		cout<<"*iter ";
+		cout<<*iter;
 		iter++;
 	}
 }
@@ -33,9 +33,13 @@ door& door::operator=(door& d){
 		it++;
 	}
 	output_ = d.output_;
+	return *this;
 }
 bool door::haveInput(){
 	if(input_.empty())
 		return false;
 	return true;
+}
+void door::clearInput(){
+	input_.clear();
 }

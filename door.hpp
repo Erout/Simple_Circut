@@ -2,6 +2,7 @@
 #define DOOR_HPP
 #include<iostream>
 #include<vector>
+#include<string>
 using std::vector;
 using std::string;
 using std::cout;
@@ -22,16 +23,13 @@ public:
 		output_ = false;
 	}
 	virtual ~door(){};
-	//virtual int getType()=0;
-	//int getId();
 	virtual bool setInput(vector<int> in)=0;//需要按连接顺序运行
 	virtual bool getOutput()=0;
-	//virtual bool* getInput()=0;
-	//virtual void setStatus(bool s);
 	bool haveInput();
 	void printInput();
 	int getId();
 	string getName();
+	void clearInput();
 	door* getNext();
 	bool setNext(door* d);
 	door& operator+=(door& d);//增加输入
